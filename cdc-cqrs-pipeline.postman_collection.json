@@ -1,0 +1,249 @@
+{
+	"info": {
+		"_postman_id": "523060a6-b9a1-4082-ae27-cca26c7dd2ea",
+		"name": "cdc-cqrs-pipeline",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "2696806"
+	},
+	"item": [
+		{
+			"name": "Get-MySQL-Connector-Status",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8083/connectors/app-mysql-db-connector/status",
+					"host": [
+						"localhost"
+					],
+					"port": "8083",
+					"path": [
+						"connectors",
+						"app-mysql-db-connector",
+						"status"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get-MongoDB-Connector-Status",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8083/connectors/app-mongo-sink-connector/status",
+					"host": [
+						"localhost"
+					],
+					"port": "8083",
+					"path": [
+						"connectors",
+						"app-mongo-sink-connector",
+						"status"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create-MySQL-Debezium-Connector",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"app-mysql-db-connector\",\r\n    \"config\": {\r\n        \"connector.class\": \"io.debezium.connector.mysql.MySqlConnector\",\r\n        \"tasks.max\": \"1\",\r\n        \"database.hostname\": \"mysql_db_server\",\r\n        \"database.port\": \"3306\",\r\n        \"database.user\": \"custom_mysql_user\",\r\n        \"database.password\": \"custom_mysql_user_password\",\r\n        \"database.server.id\": \"184054\",\r\n        \"database.server.name\": \"app-mysql-server\",\r\n        \"database.whitelist\": \"app-mysql-db\",\r\n        \"table.whitelist\": \"app-mysql-db.shipping_details,app-mysql-db.item_details\",\r\n        \"database.history.kafka.bootstrap.servers\": \"kafka_server:29092\",\r\n        \"database.history.kafka.topic\": \"dbhistory.app-mysql-db\",\r\n        \"include.schema.changes\": \"true\",\r\n        \"transforms\": \"unwrap\",\r\n        \"transforms.unwrap.type\": \"io.debezium.transforms.ExtractNewRecordState\"\r\n    }\r\n}"
+				},
+				"url": {
+					"raw": "localhost:8083/connectors/",
+					"host": [
+						"localhost"
+					],
+					"port": "8083",
+					"path": [
+						"connectors",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create-MongoDB-Sink-Connector",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"app-mongo-sink-connector\",\r\n    \"config\": {\r\n        \"connector.class\": \"com.mongodb.kafka.connect.MongoSinkConnector\",\r\n        \"topics\": \"order_aggregate\",\r\n        \"connection.uri\": \"mongodb://root_mongo_user:root_mongo_user_password@mongodb_server:27017\",\r\n        \"key.converter\": \"org.apache.kafka.connect.storage.StringConverter\",\r\n        \"value.converter\": \"org.apache.kafka.connect.json.JsonConverter\",\r\n        \"value.converter.schemas.enable\": false,\r\n        \"database\": \"order_db\",\r\n        \"collection\": \"order\",\r\n        \"document.id.strategy.overwrite.existing\": \"true\",\r\n        \"document.id.strategy\": \"com.mongodb.kafka.connect.sink.processor.id.strategy.ProvidedInKeyStrategy\",\r\n        \"transforms\": \"hk,hv\",\r\n        \"transforms.hk.type\": \"org.apache.kafka.connect.transforms.HoistField$Key\",\r\n        \"transforms.hk.field\": \"_id\",\r\n        \"transforms.hv.type\": \"org.apache.kafka.connect.transforms.HoistField$Value\",\r\n        \"transforms.hv.field\": \"order\"\r\n    }\r\n}"
+				},
+				"url": {
+					"raw": "localhost:8083/connectors/",
+					"host": [
+						"localhost"
+					],
+					"port": "8083",
+					"path": [
+						"connectors",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get-All-Connectors",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "localhost:8083/connectors/",
+					"host": [
+						"localhost"
+					],
+					"port": "8083",
+					"path": [
+						"connectors",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete-Connector",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:8083/connectors/app-mongo-sink-connector/",
+					"host": [
+						"localhost"
+					],
+					"port": "8083",
+					"path": [
+						"connectors",
+						"app-mongo-sink-connector",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post-Shipping-Details",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"orderId\": \"ed26c8b6-0431-4c95-8555-0af0cd19e2d2\",\r\n    \"customerName\": \"John Doe\",\r\n    \"customerAddress\": \"104 Rising Sun Rd\",\r\n    \"zipCode\": \"08505\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8070/api/shipping-details",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8070",
+					"path": [
+						"api",
+						"shipping-details"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post-Item-Details",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"orderId\": \"ed26c8b6-0431-4c95-8555-0af0cd19e2d2\",\r\n    \"items\": [\r\n        {\r\n            \"itemId\": \"I001\",\r\n            \"itemName\": \"Laptop\",\r\n            \"price\": 500,\r\n            \"quantity\": 1\r\n        },\r\n        {\r\n            \"itemId\": \"I002\",\r\n            \"itemName\": \"Handbag\",\r\n            \"price\": 300,\r\n            \"quantity\": 2\r\n        },\r\n        {\r\n            \"itemId\": \"I003\",\r\n            \"itemName\": \"Book\",\r\n            \"price\": 100,\r\n            \"quantity\": 3\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8070/api/item-details",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8070",
+					"path": [
+						"api",
+						"item-details"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get-Order-By-Order-Id",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8072/api/order/ed26c8b6-0431-4c95-8555-0af0cd19e2d2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8072",
+					"path": [
+						"api",
+						"order",
+						"ed26c8b6-0431-4c95-8555-0af0cd19e2d2"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
