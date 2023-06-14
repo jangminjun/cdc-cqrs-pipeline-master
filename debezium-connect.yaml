@@ -1,0 +1,31 @@
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaConnect
+metadata:
+  name: debezium-kafka-connect-cluster
+  annotations:
+    strimzi.io/use-connector-resources: "true"
+spec:
+  bootstrapServers: 'cdc-cqrs-cluster-kafka-bootstrap:9093'
+  config:
+    config.storage.replication.factor: -1
+    config.storage.topic: connect-cluster-configs
+    group.id: connect-cluster
+    offset.storage.replication.factor: -1
+    offset.storage.topic: connect-cluster-offsets
+    status.storage.replication.factor: -1
+    status.storage.topic: connect-cluster-status
+  replicas: 1
+  tls:
+    trustedCertificates:
+      - certificate: ca.crt
+        secretName: cdc-cqrs-cluster-cluster-ca-cert
+  version: 3.4.0
+  build:
+    output:
+      type: imagestream
+      image: debezium-streams-connect:latest
+    plugins:
+      - name: debezium-connector-mysql
+        artifacts:
+          - type: zip
+            url: https://maven.repository.redhat.com/ga/io/debezium/debezium-connector-mysql/2.1.4.Final-redhat-00001/debezium-connector-mysql-2.1.4.Final-redhat-00001-plugin.zip
