@@ -55,7 +55,7 @@ metadata:
   globalMemoryLimit: 2674Mi
   icon: https://raw.githubusercontent.com/devfile-samples/devfile-stack-icons/main/spring.svg
   language: Java
-  name: order-write-service
+  name: cdc-cqrs-pipeline-master
   projectType: springboot
   tags:
   - Java
