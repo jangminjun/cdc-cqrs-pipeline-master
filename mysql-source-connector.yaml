@@ -1,0 +1,19 @@
+kind: KafkaConnector
+apiVersion: kafka.strimzi.io/v1beta2
+metadata:
+  labels:
+    strimzi.io/cluster: debezium-kafka-connect-cluster
+  name: source-connector-mysql
+spec:
+  class: io.debezium.connector.mysql.MySqlConnector
+  tasksMax: 1
+  config:
+    schema.history.internal.kafka.bootstrap.servers: cdc-cqrs-cluster-kafka-bootstrap.cdc-cqrs-demo.svc.cluster.local:9092
+    schema.history.internal.kafka.topic: schema-changes.source-connector
+    database.hostname: mysql.cdc-cqrs-demo.svc.cluster.local
+    database.port: 3306
+    database.user: mjang
+    database.password: mjang
+    database.server.id: 184054
+    topic.prefix: source-connector-mysql
+    table.include.list: source-connector.*
