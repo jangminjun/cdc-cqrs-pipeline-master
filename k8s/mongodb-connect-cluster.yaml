@@ -1,9 +1,9 @@
-apiVersion: kafka.strimzi.io/v1beta1
+apiVersion: kafka.strimzi.io/v1beta2
 kind: KafkaConnect
 metadata:
   name: mongodb-connect-cluster
 spec:
-  version: 2.3.0
+  version: 3.4.0
   replicas: 1
   bootstrapServers: 'cdc-cqrs-cluster-kafka-bootstrap:9093'
   tls:
