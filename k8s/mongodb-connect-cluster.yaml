@@ -1,0 +1,13 @@
+apiVersion: kafka.strimzi.io/v1beta1
+kind: KafkaConnect
+metadata:
+  name: mongodb-connect-cluster
+spec:
+  version: 2.3.0
+  replicas: 1
+  bootstrapServers: 'cdc-cqrs-cluster-kafka-bootstrap:9093'
+  tls:
+    trustedCertificates:
+      - secretName: cdc-cqrs-cluster-cluster-ca-cert
+        certificate: ca.crt
+  image: quay.io/mjang/mongodb-sink-connector:latest
