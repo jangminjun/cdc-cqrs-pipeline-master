@@ -2,6 +2,9 @@ apiVersion: kafka.strimzi.io/v1beta2
 kind: KafkaConnect
 metadata:
   name: mongodb-connect-cluster
+  namespace: cdc-cqrs-demo
+  annotations:
+    strimzi.io/use-connector-resources: 'true'
 spec:
   version: 3.4.0
   replicas: 1
@@ -10,4 +13,5 @@ spec:
     trustedCertificates:
       - secretName: cdc-cqrs-cluster-cluster-ca-cert
         certificate: ca.crt
-  image: quay.io/mjang/mongodb-sink-connector:latest
+  image: 'quay.io/mjang/mongodb-sink-connector:latest'
+
