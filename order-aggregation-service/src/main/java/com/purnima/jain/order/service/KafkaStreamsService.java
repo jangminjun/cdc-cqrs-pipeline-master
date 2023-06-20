@@ -63,7 +63,7 @@ public class KafkaStreamsService {
 	public void processMessage(StreamsBuilder streamsBuilder) {		
 		
 		// ********** Reading Shipping Details ********** //
-		
+		log.info("********** Reading Shipping Details **********");
 		// Shipping Details Read
 		KStream<String, String> shippingDetailsSourceInputKStream = streamsBuilder.stream(shippingDetailsTopicName, Consumed.with(STRING_SERDE, STRING_SERDE));
 
@@ -87,7 +87,7 @@ public class KafkaStreamsService {
 		
 		
 		// ********** Reading Item Details ********** //
-		
+		log.info("********** Reading Item Details **********");
 		// Item Details Read
 		KStream<String, String> itemDetailsSourceInputKStream = streamsBuilder.stream(itemDetailsTopicName, Consumed.with(STRING_SERDE, STRING_SERDE));
 
@@ -117,7 +117,7 @@ public class KafkaStreamsService {
 		
 		
 		// ********** Joining Shipping Details & Item Details ********** //
-		
+		log.info("********** Joining Shipping Details & Item Details **********");
 		// Joining the two tables: shippingDetailsDtoWithKeyAsOrderIdKTable and itemDtoListWithKeyAsOrderIdKTable
 		ValueJoiner<ShippingDetailsDto, ArrayList<ItemDto>, OrderAggregate> shippingDetailsAndItemListJoiner = (shippingDetailsDto, itemDtoList) -> instantiateOrderAggregate(shippingDetailsDto,
 				itemDtoList);
