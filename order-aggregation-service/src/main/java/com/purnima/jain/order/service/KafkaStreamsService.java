@@ -163,7 +163,7 @@ public class KafkaStreamsService {
 
 			JsonNode payloadJsonNode = shippingDetailsJsonNode.get("payload");
 
-			String orderId = payloadJsonNode.get("order_id").asText();
+			String orderId = payloadJsonNode.get("after").get("order_id").asText();
 			//String customerAddress = payloadJsonNode.get("customer_address").asText();
 			//String customerName = payloadJsonNode.get("customer_name").asText();
 			//String zipCode = payloadJsonNode.get("zipcode").asText();
