@@ -23,10 +23,16 @@ public class OrderRestController {
 	@GetMapping("/api/order/{orderId}")
 	public ResponseEntity<Order> findOrderByOrderId(@PathVariable("orderId") String orderId) {
 		log.info("Entering OrderRestController.findOrderByOrderId() with orderId :: {}", orderId);
-		Order order = orderService.findOrderByOrderId(orderId);
-		if (order != null) {
-			return new ResponseEntity<>(order, HttpStatus.OK);
+		try {
+			Order order = orderService.findOrderByOrderId(orderId);
+			if (order != null) {
+				return new ResponseEntity<>(order, HttpStatus.OK);
+			}
+		} catch (NullPointerException e){
+			log.info("NullPoint Exception : " + orderId);
+
 		}
+
 
 		return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
 	}
