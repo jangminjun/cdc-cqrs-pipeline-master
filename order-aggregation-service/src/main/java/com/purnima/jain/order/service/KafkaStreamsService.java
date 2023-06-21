@@ -164,15 +164,15 @@ public class KafkaStreamsService {
 			JsonNode payloadJsonNode = shippingDetailsJsonNode.get("payload");
 
 			String orderId = payloadJsonNode.get("order_id").asText();
-			String customerAddress = payloadJsonNode.get("customer_address").asText();
-			String customerName = payloadJsonNode.get("customer_name").asText();
-			String zipCode = payloadJsonNode.get("zipcode").asText();
+			//String customerAddress = payloadJsonNode.get("customer_address").asText();
+			//String customerName = payloadJsonNode.get("customer_name").asText();
+			//String zipCode = payloadJsonNode.get("zipcode").asText();
 
 			shippingDetailsDto = new ShippingDetailsDto();
 			shippingDetailsDto.setOrderId(orderId);
-			shippingDetailsDto.setCustomerAddress(customerAddress);
-			shippingDetailsDto.setCustomerName(customerName);
-			shippingDetailsDto.setZipCode(zipCode);
+			//shippingDetailsDto.setCustomerAddress(customerAddress);
+			//shippingDetailsDto.setCustomerName(customerName);
+			//shippingDetailsDto.setZipCode(zipCode);
 
 		} catch (JsonMappingException e) {
 			log.error("JsonMappingException: ", e);
