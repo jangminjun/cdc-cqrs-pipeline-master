@@ -215,12 +215,12 @@ public class KafkaStreamsService {
 		try {
 			JsonNode itemDetailsJsonNode = objectMapper.readTree(itemDetailsJson);
 
-			JsonNode payloadJsonNode = itemDetailsJsonNode.get("payload");
+			JsonNode payloadJsonNode = itemDetailsJsonNode.get("payload.after");
 
-			String itemId = payloadJsonNode.get("item_id").asText();
-			String itemName = payloadJsonNode.get("item_name").asText();
-			Double price = payloadJsonNode.get("price").asDouble(0);
-			Integer quantity = payloadJsonNode.get("quantity").asInt(0);
+			String itemId = payloadJsonNode.get("after").get("item_id").asText();
+			String itemName = payloadJsonNode.get("after").get("item_name").asText();
+			Double price = payloadJsonNode.get("after").get("price").asDouble(0);
+			Integer quantity = payloadJsonNode.get("after").get("quantity").asInt(0);
 
 			itemDto = new ItemDto();
 			itemDto.setItemId(itemId);
