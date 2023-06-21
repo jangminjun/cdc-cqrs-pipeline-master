@@ -164,15 +164,15 @@ public class KafkaStreamsService {
 			JsonNode payloadJsonNode = shippingDetailsJsonNode.get("payload");
 
 			String orderId = payloadJsonNode.get("after").get("order_id").asText();
-			//String customerAddress = payloadJsonNode.get("customer_address").asText();
-			//String customerName = payloadJsonNode.get("customer_name").asText();
-			//String zipCode = payloadJsonNode.get("zipcode").asText();
+			String customerAddress = payloadJsonNode.get("after").get("customer_address").asText();
+			String customerName = payloadJsonNode.get("after").get("customer_name").asText();
+			String zipCode = payloadJsonNode.get("after").get("zipcode").asText();
 
 			shippingDetailsDto = new ShippingDetailsDto();
 			shippingDetailsDto.setOrderId(orderId);
-			//shippingDetailsDto.setCustomerAddress(customerAddress);
-			//shippingDetailsDto.setCustomerName(customerName);
-			//shippingDetailsDto.setZipCode(zipCode);
+			shippingDetailsDto.setCustomerAddress(customerAddress);
+			shippingDetailsDto.setCustomerName(customerName);
+			shippingDetailsDto.setZipCode(zipCode);
 
 		} catch (JsonMappingException e) {
 			log.error("JsonMappingException: ", e);
@@ -218,15 +218,15 @@ public class KafkaStreamsService {
 			JsonNode payloadJsonNode = itemDetailsJsonNode.get("payload");
 log.info("payloadJsonNode Files : "+payloadJsonNode.fieldNames());
 			String itemId = payloadJsonNode.get("after").get("item_id").asText();
-			//String itemName = payloadJsonNode.get("after").get("item_name").asText();
-			//Double price = payloadJsonNode.get("after").get("price").asDouble(0);
-			//Integer quantity = payloadJsonNode.get("after").get("quantity").asInt(0);
+			String itemName = payloadJsonNode.get("after").get("item_name").asText();
+			Double price = payloadJsonNode.get("after").get("price").asDouble(0);
+			Integer quantity = payloadJsonNode.get("after").get("quantity").asInt(0);
 
 			itemDto = new ItemDto();
 			itemDto.setItemId(itemId);
-			//itemDto.setItemName(itemName);
-			//itemDto.setPrice(price);
-			//itemDto.setQuantity(quantity);
+			itemDto.setItemName(itemName);
+			itemDto.setPrice(price);
+			itemDto.setQuantity(quantity);
 
 		} catch (JsonMappingException e) {
 			log.error("JsonMappingException: ", e);
