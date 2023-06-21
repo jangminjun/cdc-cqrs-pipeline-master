@@ -215,8 +215,8 @@ public class KafkaStreamsService {
 		try {
 			JsonNode itemDetailsJsonNode = objectMapper.readTree(itemDetailsJson);
 
-			JsonNode payloadJsonNode = itemDetailsJsonNode.get("payload.after");
-
+			JsonNode payloadJsonNode = itemDetailsJsonNode.get("payload");
+log.info("payloadJsonNode Files : "+payloadJsonNode.fieldNames());
 			String itemId = payloadJsonNode.get("after").get("item_id").asText();
 			String itemName = payloadJsonNode.get("after").get("item_name").asText();
 			Double price = payloadJsonNode.get("after").get("price").asDouble(0);
