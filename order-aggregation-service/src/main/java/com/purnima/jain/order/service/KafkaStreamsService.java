@@ -164,18 +164,15 @@ public class KafkaStreamsService {
 			JsonNode payloadJsonNode = shippingDetailsJsonNode.get("payload").get("after");
 log.info("*******payloadJsonNoe : " + payloadJsonNode.toString());
 
-			log.info("*******payloadJsonNoe order_id : " + payloadJsonNode.get(0).asText());
-			log.info("*******payloadJsonNoe customer_address : " + payloadJsonNode.get(1).asText());
-			log.info("*******payloadJsonNoe customer_name : " + payloadJsonNode.get(2).asText());
-			log.info("*******payloadJsonNoe zipcode : " + payloadJsonNode.get(3).asText());
-			/*String orderId = payloadJsonNode.get("order_id").asText();
-			String customerAddress = payloadJsonNode.get("customer_address").asText();
-			String customerName = payloadJsonNode.get("customer_name").asText();
-			String zipCode = payloadJsonNode.get("zipcode").asText();*/
-			String orderId = shippingDetailsJsonNode.get("payload").get("after").get("order_id").toString();
-			String customerAddress = shippingDetailsJsonNode.get("payload").get("after").get("customer_address").toString();
-			String customerName = shippingDetailsJsonNode.get("payload").get("after").get("customer_name").toString();
-			String zipCode = shippingDetailsJsonNode.get("payload").get("after").get("zipcode").toString();
+			log.info("*******payloadJsonNoe order_id : " + payloadJsonNode.get("ORDER_ID").asText());
+			log.info("*******payloadJsonNoe customer_address : " + payloadJsonNode.get("CUSTOMER_NAME").asText());
+			log.info("*******payloadJsonNoe customer_name : " + payloadJsonNode.get("CUSTOMER_ADDRESS").asText());
+			log.info("*******payloadJsonNoe zipcode : " + payloadJsonNode.get("ZIPCODE").asText());
+			String orderId = payloadJsonNode.get("ORDER_ID").asText();
+			String customerAddress = payloadJsonNode.get("CUSTOMER_ADDRESS").asText();
+			String customerName = payloadJsonNode.get("CUSTOMER_NAME").asText();
+			String zipCode = payloadJsonNode.get("ZIPCODE").asText();
+
 			shippingDetailsDto = new ShippingDetailsDto();
 			shippingDetailsDto.setOrderId(orderId);
 			shippingDetailsDto.setCustomerAddress(customerAddress);
@@ -227,14 +224,11 @@ log.info("*******payloadJsonNoe : " + payloadJsonNode.toString());
 
 			JsonNode payloadJsonNode = itemDetailsJsonNode.get("payload").get("after");
 log.info("******payloadJsonNode itemDetails: "+payloadJsonNode.toString());
-			/*String itemId = payloadJsonNode.get("item_id").asText();
-			String itemName = payloadJsonNode.get("item_name").asText();
-			Double price = payloadJsonNode.get("price").asDouble(0);
-			Integer quantity = payloadJsonNode.get("quantity").asInt(0);*/
-			String itemId = itemDetailsJsonNode.get("payload").get("after").get("item_id").toString();
-			String itemName = itemDetailsJsonNode.get("payload").get("after").get("item_name").toString();
-			Double price = itemDetailsJsonNode.get("payload").get("after").get("price").asDouble();
-			Integer quantity = itemDetailsJsonNode.get("payload").get("after").get("quantity").asInt(0);
+			String itemId = payloadJsonNode.get("ITEM_ID").asText();
+			String itemName = payloadJsonNode.get("ITEM_name").asText();
+			Double price = payloadJsonNode.get("PRICE").asDouble(0);
+			Integer quantity = payloadJsonNode.get("QUANTITY").asInt(0);
+
 			itemDto = new ItemDto();
 			itemDto.setItemId(itemId);
 			itemDto.setItemName(itemName);
