@@ -156,13 +156,17 @@ public class KafkaStreamsService {
 	}
 
 	private ShippingDetailsDto parseShippingDetails(String shippingDetailsJson) {
-		//ShippingDetailsDto shippingDetailsDto = null;
+		ShippingDetailsDto shippingDetailsDto = null;
 
 		try {
 			JsonNode shippingDetailsJsonNode = objectMapper.readTree(shippingDetailsJson);
 
-			//JsonNode payloadJsonNode = shippingDetailsJsonNode.get("payload").get("after");
-//log.info("*******payloadJsonNoe : " + payloadJsonNode.toString());
+			JsonNode payloadJsonNode = shippingDetailsJsonNode.get("payload").get("after");
+log.info("*******payloadJsonNoe : " + payloadJsonNode.toString());
+			log.info("*******payloadJsonNoe order_id : " + payloadJsonNode.get("order_id").asText());
+			log.info("*******payloadJsonNoe customer_address : " + payloadJsonNode.get("customer_address").asText());
+			log.info("*******payloadJsonNoe customer_name : " + payloadJsonNode.get("customer_name").asText());
+			log.info("*******payloadJsonNoe zipcode : " + payloadJsonNode.get("zipcode").asText());
 			/*String orderId = payloadJsonNode.get("order_id").asText();
 			String customerAddress = payloadJsonNode.get("customer_address").asText();
 			String customerName = payloadJsonNode.get("customer_name").asText();
@@ -171,7 +175,7 @@ public class KafkaStreamsService {
 			String customerAddress = shippingDetailsJsonNode.get("payload").get("after").get("customer_address").toString();
 			String customerName = shippingDetailsJsonNode.get("payload").get("after").get("customer_name").toString();
 			String zipCode = shippingDetailsJsonNode.get("payload").get("after").get("zipcode").toString();
-			ShippingDetailsDto shippingDetailsDto = new ShippingDetailsDto();
+			shippingDetailsDto = new ShippingDetailsDto();
 			shippingDetailsDto.setOrderId(orderId);
 			shippingDetailsDto.setCustomerAddress(customerAddress);
 			shippingDetailsDto.setCustomerName(customerName);
@@ -220,8 +224,8 @@ public class KafkaStreamsService {
 		try {
 			JsonNode itemDetailsJsonNode = objectMapper.readTree(itemDetailsJson);
 
-			//JsonNode payloadJsonNode = itemDetailsJsonNode.get("payload").get("after");
-//log.info("******payloadJsonNode itemDetails: "+payloadJsonNode.toString());
+			JsonNode payloadJsonNode = itemDetailsJsonNode.get("payload").get("after");
+log.info("******payloadJsonNode itemDetails: "+payloadJsonNode.toString());
 			/*String itemId = payloadJsonNode.get("item_id").asText();
 			String itemName = payloadJsonNode.get("item_name").asText();
 			Double price = payloadJsonNode.get("price").asDouble(0);
