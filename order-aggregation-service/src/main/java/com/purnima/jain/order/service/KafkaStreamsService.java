@@ -156,13 +156,13 @@ public class KafkaStreamsService {
 	}
 
 	private ShippingDetailsDto parseShippingDetails(String shippingDetailsJson) {
-		ShippingDetailsDto shippingDetailsDto = null;
+		//ShippingDetailsDto shippingDetailsDto = null;
 
 		try {
 			JsonNode shippingDetailsJsonNode = objectMapper.readTree(shippingDetailsJson);
 
-			JsonNode payloadJsonNode = shippingDetailsJsonNode.get("payload").get("after");
-log.info("*******payloadJsonNoe : " + payloadJsonNode.toString());
+			//JsonNode payloadJsonNode = shippingDetailsJsonNode.get("payload").get("after");
+//log.info("*******payloadJsonNoe : " + payloadJsonNode.toString());
 			/*String orderId = payloadJsonNode.get("order_id").asText();
 			String customerAddress = payloadJsonNode.get("customer_address").asText();
 			String customerName = payloadJsonNode.get("customer_name").asText();
@@ -171,7 +171,7 @@ log.info("*******payloadJsonNoe : " + payloadJsonNode.toString());
 			String customerAddress = shippingDetailsJsonNode.get("payload").get("after").get("customer_address").toString();
 			String customerName = shippingDetailsJsonNode.get("payload").get("after").get("customer_name").toString();
 			String zipCode = shippingDetailsJsonNode.get("payload").get("after").get("zipcode").toString();
-			shippingDetailsDto = new ShippingDetailsDto();
+			ShippingDetailsDto shippingDetailsDto = new ShippingDetailsDto();
 			shippingDetailsDto.setOrderId(orderId);
 			shippingDetailsDto.setCustomerAddress(customerAddress);
 			shippingDetailsDto.setCustomerName(customerName);
