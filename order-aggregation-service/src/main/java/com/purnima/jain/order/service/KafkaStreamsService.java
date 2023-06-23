@@ -161,12 +161,12 @@ public class KafkaStreamsService {
 		try {
 			JsonNode shippingDetailsJsonNode = objectMapper.readTree(shippingDetailsJson);
 
-			JsonNode payloadJsonNode = shippingDetailsJsonNode.get("payload");
+			JsonNode payloadJsonNode = shippingDetailsJsonNode.get("payload").get("after");
 log.info("*******payloadJsonNoe : " + payloadJsonNode.toString());
-			String orderId = payloadJsonNode.get("after").get("order_id").asText();
-			String customerAddress = payloadJsonNode.get("after").get("customer_address").asText();
-			String customerName = payloadJsonNode.get("after").get("customer_name").asText();
-			String zipCode = payloadJsonNode.get("after").get("zipcode").asText();
+			String orderId = payloadJsonNode.get("order_id").asText();
+			String customerAddress = payloadJsonNode.get("customer_address").asText();
+			String customerName = payloadJsonNode.get("customer_name").asText();
+			String zipCode = payloadJsonNode.get("zipcode").asText();
 
 			shippingDetailsDto = new ShippingDetailsDto();
 			shippingDetailsDto.setOrderId(orderId);
@@ -180,8 +180,10 @@ log.info("*******payloadJsonNoe : " + payloadJsonNode.toString());
 		} catch (JsonProcessingException e) {
 			log.error("JsonProcessingException: ", e);
 			e.printStackTrace();
+		} catch (Exception e) {
+			log.error("Exception: ", e);
+			e.printStackTrace();
 		}
-
 		return shippingDetailsDto;
 	}
 
@@ -215,12 +217,12 @@ log.info("*******payloadJsonNoe : " + payloadJsonNode.toString());
 		try {
 			JsonNode itemDetailsJsonNode = objectMapper.readTree(itemDetailsJson);
 
-			JsonNode payloadJsonNode = itemDetailsJsonNode.get("payload");
+			JsonNode payloadJsonNode = itemDetailsJsonNode.get("payload").get("after");
 log.info("payloadJsonNode Files : "+payloadJsonNode.fieldNames());
-			String itemId = payloadJsonNode.get("after").get("item_id").asText();
-			String itemName = payloadJsonNode.get("after").get("item_name").asText();
-			Double price = payloadJsonNode.get("after").get("price").asDouble(0);
-			Integer quantity = payloadJsonNode.get("after").get("quantity").asInt(0);
+			String itemId = payloadJsonNode.get("item_id").asText();
+			String itemName = payloadJsonNode.get("item_name").asText();
+			Double price = payloadJsonNode.get("price").asDouble(0);
+			Integer quantity = payloadJsonNode.get("quantity").asInt(0);
 
 			itemDto = new ItemDto();
 			itemDto.setItemId(itemId);
@@ -233,6 +235,9 @@ log.info("payloadJsonNode Files : "+payloadJsonNode.fieldNames());
 			e.printStackTrace();
 		} catch (JsonProcessingException e) {
 			log.error("JsonProcessingException: ", e);
+			e.printStackTrace();
+		} catch (Exception e) {
+			log.error("Exception: ", e);
 			e.printStackTrace();
 		}
 
