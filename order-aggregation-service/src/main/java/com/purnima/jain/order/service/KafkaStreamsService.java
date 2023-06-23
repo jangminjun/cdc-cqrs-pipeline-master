@@ -225,7 +225,7 @@ log.info("*******payloadJsonNoe : " + payloadJsonNode.toString());
 			JsonNode payloadJsonNode = itemDetailsJsonNode.get("payload").get("after");
 log.info("******payloadJsonNode itemDetails: "+payloadJsonNode.toString());
 			String itemId = payloadJsonNode.get("ITEM_ID").asText();
-			String itemName = payloadJsonNode.get("ITEM_name").asText();
+			String itemName = payloadJsonNode.get("ITEM_NAME").asText();
 			Double price = payloadJsonNode.get("PRICE").asDouble(0);
 			Integer quantity = payloadJsonNode.get("QUANTITY").asInt(0);
 
