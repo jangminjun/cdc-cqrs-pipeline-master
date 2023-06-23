@@ -13,12 +13,12 @@ spec:
     transforms: 'hk,hv'
     document.id.strategy.overwrite.existing: 'true'
     value.converter.schemas.enable: false
-    transforms.hk.renames: _id
+    transforms.hk.field: _id
     key.converter: org.apache.kafka.connect.storage.StringConverter
     document.id.strategy: com.mongodb.kafka.connect.sink.processor.id.strategy.ProvidedInKeyStrategy
     transforms.hv.type: org.apache.kafka.connect.transforms.HoistField$Value
     database: order_db
-    transforms.hv.renames: order
+    transforms.hv.field: order
     connection.uri: 'mongodb://mongodb.cdc-cqrs-demo.svc.cluster.local:27017'
     transforms.hk.type: org.apache.kafka.connect.transforms.HoistField$Key
     collection: order
