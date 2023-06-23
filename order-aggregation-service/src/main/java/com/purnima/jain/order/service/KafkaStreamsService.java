@@ -163,10 +163,11 @@ public class KafkaStreamsService {
 
 			JsonNode payloadJsonNode = shippingDetailsJsonNode.get("payload").get("after");
 log.info("*******payloadJsonNoe : " + payloadJsonNode.toString());
-			log.info("*******payloadJsonNoe order_id : " + payloadJsonNode.get("order_id").asText());
-			log.info("*******payloadJsonNoe customer_address : " + payloadJsonNode.get("customer_address").asText());
-			log.info("*******payloadJsonNoe customer_name : " + payloadJsonNode.get("customer_name").asText());
-			log.info("*******payloadJsonNoe zipcode : " + payloadJsonNode.get("zipcode").asText());
+
+			log.info("*******payloadJsonNoe order_id : " + payloadJsonNode.get(0).asText());
+			log.info("*******payloadJsonNoe customer_address : " + payloadJsonNode.get(1).asText());
+			log.info("*******payloadJsonNoe customer_name : " + payloadJsonNode.get(2).asText());
+			log.info("*******payloadJsonNoe zipcode : " + payloadJsonNode.get(3).asText());
 			/*String orderId = payloadJsonNode.get("order_id").asText();
 			String customerAddress = payloadJsonNode.get("customer_address").asText();
 			String customerName = payloadJsonNode.get("customer_name").asText();
