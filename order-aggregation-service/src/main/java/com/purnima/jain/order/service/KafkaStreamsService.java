@@ -163,10 +163,10 @@ public class KafkaStreamsService {
 
 			JsonNode payloadJsonNode = shippingDetailsJsonNode.get("payload");
 
-			String orderId = payloadJsonNode.get("after").get("order_id").asText();
-			String customerAddress = payloadJsonNode.get("after").get("customer_address").asText();
-			String customerName = payloadJsonNode.get("after").get("customer_name").asText();
-			String zipCode = payloadJsonNode.get("after").get("zipcode").asText();
+			String orderId = payloadJsonNode.get("order_id").asText();
+			String customerAddress = payloadJsonNode.get("customer_address").asText();
+			String customerName = payloadJsonNode.get("customer_name").asText();
+			String zipCode = payloadJsonNode.get("zipcode").asText();
 
 			shippingDetailsDto = new ShippingDetailsDto();
 			shippingDetailsDto.setOrderId(orderId);
@@ -217,10 +217,10 @@ public class KafkaStreamsService {
 
 			JsonNode payloadJsonNode = itemDetailsJsonNode.get("payload");
 log.info("payloadJsonNode Files : "+payloadJsonNode.fieldNames());
-			String itemId = payloadJsonNode.get("after").get("item_id").asText();
-			String itemName = payloadJsonNode.get("after").get("item_name").asText();
-			Double price = payloadJsonNode.get("after").get("price").asDouble(0);
-			Integer quantity = payloadJsonNode.get("after").get("quantity").asInt(0);
+			String itemId = payloadJsonNode.get("item_id").asText();
+			String itemName = payloadJsonNode.get("item_name").asText();
+			Double price = payloadJsonNode.get("price").asDouble(0);
+			Integer quantity = payloadJsonNode.get("quantity").asInt(0);
 
 			itemDto = new ItemDto();
 			itemDto.setItemId(itemId);

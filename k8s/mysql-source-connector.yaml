@@ -8,7 +8,7 @@ spec:
   class: io.debezium.connector.mysql.MySqlConnector
   tasksMax: 1
   config:
-    table.include.list: source-connector.*
+    table.include.list: 'appmysqldb.item_details,appmysqldb.shipping_details'
     database.hostname: mysql.cdc-cqrs-demo.svc.cluster.local
     database.password: mjang
     topic.prefix: source-connector-mysql
@@ -17,4 +17,3 @@ spec:
     schema.history.internal.kafka.topic: schema-changes.source-connector
     database.user: mjang
     schema.history.internal.kafka.bootstrap.servers: 'cdc-cqrs-cluster-kafka-bootstrap.cdc-cqrs-demo.svc.cluster.local:9092'
-    
