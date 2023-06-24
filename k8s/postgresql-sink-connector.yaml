@@ -1,0 +1,16 @@
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaConnector
+metadata:
+  name: postgres-sink-connector
+  namespace: cdc-cqrs-demo
+  labels:
+    strimzi.io/cluster: postgres-kafka-connect-cluster
+spec:
+  class: io.confluent.connect.jdbc.JdbcSinkConnector
+  tasksMax: 1
+  config:
+    topics: "order_aggregate"
+    connection.url: "jdbc:postgresql://postgres-service.kafka.svc.cluster.local:5432/postgres"
+    connection.user: "mjang"
+    connection.password: "mjang"
+    auto.create: "true"

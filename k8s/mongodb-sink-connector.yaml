@@ -2,7 +2,7 @@ apiVersion: kafka.strimzi.io/v1beta2
 kind: KafkaConnector
 metadata:
   labels:
-    strimzi.io/cluster: mongodb-connect-cluster
+    strimzi.io/cluster: mongo-kafka-connect-cluster
   name: mongodb-sink-connector
   namespace: cdc-cqrs-demo
 spec:
@@ -19,7 +19,7 @@ spec:
     transforms.hv.type: org.apache.kafka.connect.transforms.HoistField$Value
     database: order_db
     transforms.hv.field: order
-    connection.uri: 'mongodb://mongodb.cdc-cqrs-demo.svc.cluster.local:27017'
+    connection.uri: 'mongodb://mjang:mjang@mongodb.cdc-cqrs-demo.svc.cluster.local:27017/order_db?authSource=order_db'
     transforms.hk.type: org.apache.kafka.connect.transforms.HoistField$Key
     collection: order
   tasksMax: 1
