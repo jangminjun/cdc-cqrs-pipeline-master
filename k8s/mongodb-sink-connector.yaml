@@ -8,13 +8,13 @@ metadata:
 spec:
   class: com.mongodb.kafka.connect.MongoSinkConnector
   config:
+    key.converter: org.apache.kafka.connect.storage.StringConverter
     value.converter: org.apache.kafka.connect.json.JsonConverter
+    value.converter.schemas.enable: false
     topics: order_aggregate
     transforms: 'hk,hv'
     document.id.strategy.overwrite.existing: 'true'
-    value.converter.schemas.enable: false
     transforms.hk.field: _id
-    key.converter: org.apache.kafka.connect.storage.StringConverter
     document.id.strategy: com.mongodb.kafka.connect.sink.processor.id.strategy.ProvidedInKeyStrategy
     transforms.hv.type: org.apache.kafka.connect.transforms.HoistField$Value
     database: order_db

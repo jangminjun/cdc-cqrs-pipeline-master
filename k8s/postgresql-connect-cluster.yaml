@@ -1,0 +1,25 @@
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaConnect
+metadata:
+  name: postgres-connect-cluster
+  namespace: cdc-cqrs-demo
+  annotations:
+    strimzi.io/use-connector-resources: 'true'
+spec:
+  version: 3.4.0
+  replicas: 1
+  bootstrapServers: 'cdc-cqrs-cluster-kafka-bootstrap.cdc-cqrs-demo.svc.cluster.local:9093'
+  tls:
+    trustedCertificates:
+      - secretName: cdc-cqrs-cluster-cluster-ca-cert
+        certificate: ca.crt
+  image: 'quay.io/mjang/postgres-sink-connector:latest'
+  config:
+    group.id: postgres-connect-cluster
+    config.storage.replication.factor: -1
+    status.storage.replication.factor: -1
+    offset.storage.replication.factor: -1
+    config.storage.topic: postgres-connect-cluster-configs
+    offset.storage.topic: postgres-connect-cluster-offsets
+    status.storage.topic: postgres-connect-cluster-status
+

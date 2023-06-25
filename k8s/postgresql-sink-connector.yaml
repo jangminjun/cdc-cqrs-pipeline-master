@@ -10,7 +10,7 @@ spec:
   tasksMax: 1
   config:
     topics: "order_aggregate"
-    connection.url: "jdbc:postgresql://postgres-service.kafka.svc.cluster.local:5432/postgres"
+    connection.url: "jdbc:postgresql://postgresql.cdc-cqrs-demo.svc.cluster.local:5432/postgres"
     connection.user: "mjang"
     connection.password: "mjang"
     auto.create: "true"
