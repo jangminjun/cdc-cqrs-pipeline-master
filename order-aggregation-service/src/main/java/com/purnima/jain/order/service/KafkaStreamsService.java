@@ -164,14 +164,14 @@ public class KafkaStreamsService {
 			JsonNode payloadJsonNode = shippingDetailsJsonNode.get("payload").get("after");
 log.info("*******payloadJsonNoe : " + payloadJsonNode.toString());
 
-			log.info("*******payloadJsonNoe order_id : " + payloadJsonNode.get("ORDER_ID").asText());
-			log.info("*******payloadJsonNoe customer_address : " + payloadJsonNode.get("CUSTOMER_NAME").asText());
-			log.info("*******payloadJsonNoe customer_name : " + payloadJsonNode.get("CUSTOMER_ADDRESS").asText());
-			log.info("*******payloadJsonNoe zipcode : " + payloadJsonNode.get("ZIPCODE").asText());
-			String orderId = payloadJsonNode.get("ORDER_ID").asText();
-			String customerAddress = payloadJsonNode.get("CUSTOMER_ADDRESS").asText();
-			String customerName = payloadJsonNode.get("CUSTOMER_NAME").asText();
-			String zipCode = payloadJsonNode.get("ZIPCODE").asText();
+			log.info("*******payloadJsonNoe order_id : " + payloadJsonNode.get("order_id").asText());
+			log.info("*******payloadJsonNoe customer_address : " + payloadJsonNode.get("customer_address").asText());
+			log.info("*******payloadJsonNoe customer_name : " + payloadJsonNode.get("customer_name").asText());
+			log.info("*******payloadJsonNoe zipcode : " + payloadJsonNode.get("zipcode").asText());
+			String orderId = payloadJsonNode.get("order_id").asText();
+			String customerAddress = payloadJsonNode.get("customer_address").asText();
+			String customerName = payloadJsonNode.get("customer_name").asText();
+			String zipCode = payloadJsonNode.get("zipcode").asText();
 
 			shippingDetailsDto = new ShippingDetailsDto();
 			shippingDetailsDto.setOrderId(orderId);
@@ -224,10 +224,10 @@ log.info("*******payloadJsonNoe : " + payloadJsonNode.toString());
 
 			JsonNode payloadJsonNode = itemDetailsJsonNode.get("payload").get("after");
 log.info("******payloadJsonNode itemDetails: "+payloadJsonNode.toString());
-			String itemId = payloadJsonNode.get("ITEM_ID").asText();
-			String itemName = payloadJsonNode.get("ITEM_NAME").asText();
-			Double price = payloadJsonNode.get("PRICE").asDouble(0);
-			Integer quantity = payloadJsonNode.get("QUANTITY").asInt(0);
+			String itemId = payloadJsonNode.get("item_id").asText();
+			String itemName = payloadJsonNode.get("item_name").asText();
+			Double price = payloadJsonNode.get("price").asDouble(0);
+			Integer quantity = payloadJsonNode.get("quantity").asInt(0);
 
 			itemDto = new ItemDto();
 			itemDto.setItemId(itemId);
